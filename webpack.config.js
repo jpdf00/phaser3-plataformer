@@ -35,7 +35,7 @@ module.exports = {
           to: path.resolve(__dirname, 'build')
         },
         {
-          from: path.resolve(__dirname, 'src', 'assets'),
+          from: path.resolve(__dirname, 'src'),
           to: path.resolve(__dirname, 'build')
         },
       ],
