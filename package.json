@@ -1,0 +1,8 @@
+{
+  "name": "phaser3-plataformer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jpdf00/phaser3-plataformer.git",
+  "author": "jpdf00 <j.pdf00@gmail.com>",
+  "license": "MIT"
+}
