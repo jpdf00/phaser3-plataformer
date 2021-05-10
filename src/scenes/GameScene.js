@@ -1,17 +1,21 @@
-class PlayGame extends Phaser.Scene{
+import 'phaser';
+
+//'Elapsed seconds: ' + this.game.time.totalElapsedSeconds(), 32, 32
+
+export default class GameScene extends Phaser.Scene {
 
   constructor() {
-    super('PlayGame');
+    super('Game');
   }
 
-  preload () {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('platform', 'assets/platform.png');
+  init () {
+    this.score = 0;
+    this.scoreText;
   }
 
   create () {
     //  A simple background for our game
-    this.add.image(400, 300, 'sky')
+    this.add.image(800 / 2, 600 / 2, 'sky').setScale(3);
 
     // group with all active platforms.
     this.platformGroup = this.add.group({
@@ -30,7 +34,36 @@ class PlayGame extends Phaser.Scene{
     });
 
     // adding a platform to the game, the arguments are platform width and x position
-    this.addPlatform(800, 400);
+    this.addPlatform(800, 800 / 2);
+
+
+    this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    // number of consecutive jumps made by the player
+    this.playerJumps = 0;
+
+    this.player = this.physics.add.sprite(400, 250, "player").setScale(1.5);
+    this.player.setGravityY(900);
+
+    this.anims.create({
+           key: "run",
+           frames: this.anims.generateFrameNumbers("player", {
+               start: 0,
+               end: 2
+           }),
+           frameRate: 6,
+           repeat: -1
+       });
+
+       // setting collisions between the player and the platform group
+       this.physics.add.collider(this.player, this.platformGroup, function(){
+           // play "run" animation if the player is on a platform
+          if(!this.player.anims.isPlaying){
+               this.player.anims.play("run");
+          }
+       }, null, this);
+
+       // checking for input
+     this.input.on("pointerdown", this.jump, this);
   };
 
   // the core of the script: platform are added from the pool or created on the fly
@@ -44,20 +77,36 @@ class PlayGame extends Phaser.Scene{
       platform.visible = true;
       this.platformPool.remove(platform);
     } else {
-      platform = this.physics.add.sprite(posX, 568, "platform");
+      platform = this.physics.add.sprite(posX, Phaser.Math.Between(464, 650), "platform");
       platform.setImmovable(true);
       platform.setVelocityX(-350);
+      platform.setFrictionX(0);
       this.platformGroup.add(platform);
     };
     platform.displayWidth = platformWidth;
-    this.nextPlatformDistance = Phaser.Math.Between(2, 3);
+    this.nextPlatformDistance = Phaser.Math.Between(50, 350);
+  }
+
+  jump() {
+    if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < 2)){
+        if(this.player.body.touching.down){
+            this.playerJumps = 0;
+        }
+        this.player.setVelocityY(500 * -1);
+        this.playerJumps ++;
+
+        // stops animation
+        this.player.anims.stop();
+    }
   }
 
   update () {
+    this.score += 1/60;
+    this.scoreText.setText('Score: ' + Phaser.Math.RoundTo(this.score, 0));
     // recycling platforms
-    let minDistance = 400;
+    let minDistance = 800;
     this.platformGroup.getChildren().forEach(function(platform) {
-      let platformDistance = 400 - platform.x - platform.displayWidth / 2;
+      let platformDistance = 800 - platform.x - platform.displayWidth / 2;
       minDistance = Math.min(minDistance, platformDistance);
       if (platform.x < - platform.displayWidth / 2){
         this.platformGroup.killAndHide(platform);
@@ -71,5 +120,3 @@ class PlayGame extends Phaser.Scene{
     }
   }
 }
-
-export default PlayGame;
