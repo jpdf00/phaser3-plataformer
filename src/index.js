@@ -1,4 +1,120 @@
 import 'phaser';
+//import PlayGame from './scenes/GameScene.js';
+
+class playGame extends Phaser.Scene{
+
+  constructor() {
+    super('PlayGame');
+  }
+
+  preload () {
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('platform', 'assets/building.png');
+    this.load.spritesheet('player', 'assets/cat.png', { frameWidth: 32, frameHeight: 27 });
+  }
+
+  create () {
+    //  A simple background for our game
+    this.add.image(game.config.width / 2, game.config.height / 2, 'sky').setScale(3);
+
+    // group with all active platforms.
+    this.platformGroup = this.add.group({
+      // once a platform is removed, it's added to the pool
+      removeCallback: function(platform){
+        platform.scene.platformPool.add(platform)
+      }
+    });
+
+    // pool
+    this.platformPool = this.add.group({
+      // once a platform is removed from the pool, it's added to the active platforms group
+      removeCallback: function(platform){
+        platform.scene.platformGroup.add(platform)
+      }
+    });
+
+    // adding a platform to the game, the arguments are platform width and x position
+    this.addPlatform(game.config.width, game.config.width / 2);
+    // number of consecutive jumps made by the player
+    this.playerJumps = 0;
+
+    this.player = this.physics.add.sprite(200, 250, "player");
+    this.player.setGravityY(900);
+
+    this.anims.create({
+           key: "run",
+           frames: this.anims.generateFrameNumbers("player", {
+               start: 0,
+               end: 2
+           }),
+           frameRate: 6,
+           repeat: -1
+       });
+
+       // setting collisions between the player and the platform group
+       this.physics.add.collider(this.player, this.platformGroup, function(){
+           // play "run" animation if the player is on a platform
+          if(!this.player.anims.isPlaying){
+               this.player.anims.play("run");
+          }
+       }, null, this);
+
+       // checking for input
+     this.input.on("pointerdown", this.jump, this);
+  };
+
+  // the core of the script: platform are added from the pool or created on the fly
+  addPlatform(platformWidth, posX) {
+    let platform;
+
+    if (this.platformPool.getLength()) {
+      platform = this.platformPool.getFirst();
+      platform.x = posX;
+      platform.active = true;
+      platform.visible = true;
+      this.platformPool.remove(platform);
+    } else {
+      platform = this.physics.add.sprite(posX, Phaser.Math.Between(450, 600), "platform");
+      platform.setImmovable(true);
+      platform.setVelocityX(-350);
+      platform.setFrictionX(0);
+      this.platformGroup.add(platform);
+    };
+    platform.displayWidth = platformWidth;
+    this.nextPlatformDistance = Phaser.Math.Between(50, 350);
+  }
+
+  jump() {
+    if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < 2)){
+        if(this.player.body.touching.down){
+            this.playerJumps = 0;
+        }
+        this.player.setVelocityY(400 * -1);
+        this.playerJumps ++;
+
+        // stops animation
+        this.player.anims.stop();
+    }
+  }
+
+  update () {
+    // recycling platforms
+    let minDistance = game.config.width;
+    this.platformGroup.getChildren().forEach(function(platform) {
+      let platformDistance = game.config.width - platform.x - platform.displayWidth / 2;
+      minDistance = Math.min(minDistance, platformDistance);
+      if (platform.x < - platform.displayWidth / 2){
+        this.platformGroup.killAndHide(platform);
+        this.platformGroup.remove(platform);
+      }
+    }, this);
+    // adding new platforms
+    if(minDistance > this.nextPlatformDistance){
+      var nextPlatformWidth = Phaser.Math.Between(50, 250);
+      this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2);
+    }
+  }
+}
 
 var config = {
   type: Phaser.AUTO,
@@ -7,182 +123,10 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
       debug: false
     }
   },
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  }
+  scene: playGame
 };
 
-var player;
-var stars;
-var bombs;
-var platforms;
-var cursors;
-var score = 0;
-var gameOver = false;
-var scoreText;
-
 var game = new Phaser.Game(config);
-
-function preload ()
-{
-  this.load.image('sky', 'assets/sky.png');
-  this.load.image('ground', 'assets/platform.png');
-  this.load.image('star', 'assets/star.png');
-  this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-}
-
-function create ()
-{
-  //  A simple background for our game
-  this.add.image(400, 300, 'sky');
-
-  //  The platforms group contains the ground and the 2 ledges we can jump on
-  platforms = this.physics.add.staticGroup();
-
-  //  Here we create the ground.
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-  platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-
-  //  Now let's create some ledges
-  platforms.create(600, 400, 'ground');
-  platforms.create(50, 250, 'ground');
-  platforms.create(750, 220, 'ground');
-
-  // The player and its settings
-  player = this.physics.add.sprite(100, 450, 'dude');
-
-  //  Player physics properties. Give the little guy a slight bounce.
-  player.setBounce(0.2);
-  player.setCollideWorldBounds(true);
-
-  //  Our player animations, turning, walking left and walking right.
-  this.anims.create({
-    key: 'left',
-    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-    frameRate: 10,
-    repeat: -1
-  });
-
-  this.anims.create({
-    key: 'turn',
-    frames: [ { key: 'dude', frame: 4 } ],
-    frameRate: 20
-  });
-
-  this.anims.create({
-    key: 'right',
-    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-    frameRate: 10,
-    repeat: -1
-  });
-
-  //  Input Events
-  cursors = this.input.keyboard.createCursorKeys();
-
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-  stars = this.physics.add.group({
-    key: 'star',
-    repeat: 11,
-    setXY: { x: 12, y: 0, stepX: 70 }
-  });
-
-  stars.children.iterate(function (child) {
-
-    //  Give each star a slightly different bounce
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-
-  });
-
-  bombs = this.physics.add.group();
-
-  //  The score
-  scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
-  //  Collide the player and the stars with the platforms
-  this.physics.add.collider(player, platforms);
-  this.physics.add.collider(stars, platforms);
-  this.physics.add.collider(bombs, platforms);
-
-  //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-  this.physics.add.overlap(player, stars, collectStar, null, this);
-
-  this.physics.add.collider(player, bombs, hitBomb, null, this);
-}
-
-function update ()
-{
-  if (gameOver)
-  {
-    return;
-  }
-
-  if (cursors.left.isDown)
-  {
-    player.setVelocityX(-160);
-
-    player.anims.play('left', true);
-  }
-  else if (cursors.right.isDown)
-  {
-    player.setVelocityX(160);
-
-    player.anims.play('right', true);
-  }
-  else
-  {
-    player.setVelocityX(0);
-
-    player.anims.play('turn');
-  }
-
-  if (cursors.up.isDown && player.body.touching.down)
-  {
-    player.setVelocityY(-330);
-  }
-}
-
-function collectStar (player, star)
-{
-  star.disableBody(true, true);
-
-  //  Add and update the score
-  score += 10;
-  scoreText.setText('Score: ' + score);
-
-  if (stars.countActive(true) === 0)
-  {
-    //  A new batch of stars to collect
-    stars.children.iterate(function (child) {
-
-      child.enableBody(true, child.x, 0, true, true);
-
-    });
-
-    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    var bomb = bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    bomb.allowGravity = false;
-
-  }
-}
-
-function hitBomb (player, bomb)
-{
-  this.physics.pause();
-
-  player.setTint(0xff0000);
-
-  player.anims.play('turn');
-
-  gameOver = true;
-}
