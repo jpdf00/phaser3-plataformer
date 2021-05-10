@@ -38,7 +38,7 @@ class playGame extends Phaser.Scene{
     // number of consecutive jumps made by the player
     this.playerJumps = 0;
 
-    this.player = this.physics.add.sprite(200, 250, "player");
+    this.player = this.physics.add.sprite(400, 250, "player").setScale(1.5);
     this.player.setGravityY(900);
 
     this.anims.create({
@@ -74,7 +74,7 @@ class playGame extends Phaser.Scene{
       platform.visible = true;
       this.platformPool.remove(platform);
     } else {
-      platform = this.physics.add.sprite(posX, Phaser.Math.Between(450, 600), "platform");
+      platform = this.physics.add.sprite(posX, Phaser.Math.Between(464, 650), "platform");
       platform.setImmovable(true);
       platform.setVelocityX(-350);
       platform.setFrictionX(0);
@@ -89,7 +89,7 @@ class playGame extends Phaser.Scene{
         if(this.player.body.touching.down){
             this.playerJumps = 0;
         }
-        this.player.setVelocityY(400 * -1);
+        this.player.setVelocityY(500 * -1);
         this.playerJumps ++;
 
         // stops animation
