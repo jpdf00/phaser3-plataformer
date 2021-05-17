@@ -53,6 +53,7 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.stop();
     }
   }
+
   //************************************************************
 
   //********************Create Function********************
@@ -128,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
 
     // game over
     if(this.player.y > 800 || this.player.x < 0){
-      this.scene.start("Title");
+      this.scene.start("GameOver", {score: Phaser.Math.RoundTo(this.score, 0)});
     }
 
     //--------------------Score--------------------
