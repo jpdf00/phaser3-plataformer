@@ -1,5 +1,5 @@
 import 'phaser';
-import {saveScore, getScore} from './util.js';
+import {saveScore} from './util.js';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -43,17 +43,17 @@ export default class GameOverScene extends Phaser.Scene {
       div.removeAttribute('Style')
     });
 
-    //Replay Score
-    this.replayButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.replayButton, 0);
+    //Title Score
+    this.titleButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
+    this.centerButton(this.titleButton, 0);
 
-    this.replayText = this.add.text(0, 0, "Replay", { fontSize: '32px', fill: '#fff' });
-    this.centerButtonText(this.replayText, this.replayButton);
+    this.titleText = this.add.text(0, 0, "Title Screen", { fontSize: '24px', fill: '#fff' });
+    this.centerButtonText(this.titleText, this.titleButton);
 
-    this.replayButton.on('pointerdown', pointer => {
+    this.titleButton.on('pointerdown', pointer => {
       input.value = '';
       div.removeAttribute('Style')
-      this.scene.start('Game');
+      this.scene.start('Title');
     });
 
     //Leaderboard Score
@@ -63,10 +63,10 @@ export default class GameOverScene extends Phaser.Scene {
     this.leaderboardText = this.add.text(0, 0, "Leaderboard", { fontSize: '24px', fill: '#fff' });
     this.centerButtonText(this.leaderboardText, this.leaderboardButton);
 
-    this.leaderboardButton.on('pointerdown', pointer => {
+    this.leaderboardButton.on('pointerdown', (pointer) => {
       input.value = '';
       div.removeAttribute('Style')
-      this.scene.start('Game');
+      this.scene.start('Leaderboard');
     });
 
     this.input.on('pointerover', function (event, gameObjects) {

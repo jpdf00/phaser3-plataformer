@@ -86,7 +86,7 @@ export default class GameScene extends Phaser.Scene {
 
     //--------------------Score--------------------
     // Add score to game.
-    this.scoreText = this.add.text(24, 24, 'Score: 0', { fontSize: '32px', fill: '#000' });
+    this.scoreText = this.add.text(24, 24, 'Score: 0 seconds', { fontSize: '32px', fill: '#000' });
     //------------------------------------------------------------
 
     //--------------------Player--------------------
@@ -135,7 +135,7 @@ export default class GameScene extends Phaser.Scene {
     //--------------------Score--------------------
     // Refreshes the score each second.
     this.score += 1/60;
-    this.scoreText.setText('Score: ' + Phaser.Math.RoundTo(this.score, 0));
+    this.scoreText.setText(`Score: ${Phaser.Math.RoundTo(this.score, 0)} seconds`);
     //------------------------------------------------------------
 
     //--------------------Platform--------------------

@@ -21,29 +21,16 @@ export default class TitleScene extends Phaser.Scene {
       this.scene.start('Game');
     });
 
-    /*
-    // Options
-    this.optionsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.optionsButton);
+    //Leaderboard Score
+    this.leaderboardButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
+    this.centerButton(this.leaderboardButton, -1);
 
-    this.optionsText = this.add.text(0, 0, 'Options', { fontSize: '32px', fill: '#fff' });
-    this.centerButtonText(this.optionsText, this.optionsButton);
+    this.leaderboardText = this.add.text(0, 0, "Leaderboard", { fontSize: '24px', fill: '#fff' });
+    this.centerButtonText(this.leaderboardText, this.leaderboardButton);
 
-    this.optionsButton.on('pointerdown', function (pointer) {
-      this.scene.start('Options');
-    }.bind(this));
-
-    // Credits
-    this.creditsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.creditsButton, -1);
-
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.centerButtonText(this.creditsText, this.creditsButton);
-
-    this.creditsButton.on('pointerdown', function (pointer) {
-      this.scene.start('Credits');
-    }.bind(this));
-    */
+    this.leaderboardButton.on('pointerdown', pointer => {
+      this.scene.start('Leaderboard');
+    });
 
     this.input.on('pointerover', function (event, gameObjects) {
       gameObjects[0].setTexture('blueButton2');

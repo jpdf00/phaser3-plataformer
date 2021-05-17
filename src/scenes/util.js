@@ -26,4 +26,20 @@ async function getScore() {
   return resp.json();
 }
 
-export {saveScore, getScore};
+function sortArray(array) {
+  for (let i = 0 ; ; ) {
+    let notChanged = true;
+    for (let j = 0; j < array.length - 1; j += 1){
+      if (array[j].score < array[j + 1].score) {
+      [array[j], array[j + 1]] = [array[j + 1], array[j]]
+      notChanged = false;
+      }
+    }
+    if (notChanged) {
+      break
+    }
+  }
+  return array;
+}
+
+export {saveScore, getScore, sortArray};
