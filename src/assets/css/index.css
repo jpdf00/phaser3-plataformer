@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  position:absolute;
+  z-index: 999;
+  font-size: 50px;
+  border-radius: 10px;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: ;
+}
+
+div {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position:absolute;
+  z-index: 998;
+  width: 800px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
