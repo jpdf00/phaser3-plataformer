@@ -25,9 +25,9 @@ export default class GameOverScene extends Phaser.Scene {
     this.centerButton(this.saveButton, 1);
 
     this.saveText = this.add.text(0, 0, 'Save Score', { fontSize: '24px', fill: '#fff' });
-    this.centerButtonText(this.saveText, this.saveButton);
+    this.centerButtonText(this.saveText, 1);
 
-    this.saveButton.on('pointerdown', (pointer) => {
+    this.saveButton.on('pointerdown', () => {
       if (!this.saved) {
         saveScore(input.value, this.score).then((resp) => {
           this.updateText = this.add.text(400, 100, `${resp.result}`, { fontSize: '32px', fill: '#fff' });
@@ -45,12 +45,12 @@ export default class GameOverScene extends Phaser.Scene {
 
     // Title Score
     this.titleButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.titleButton, 0);
+    this.centerButton(this.titleButton);
 
     this.titleText = this.add.text(0, 0, 'Title Screen', { fontSize: '24px', fill: '#fff' });
-    this.centerButtonText(this.titleText, this.titleButton);
+    this.centerButtonText(this.titleText);
 
-    this.titleButton.on('pointerdown', (pointer) => {
+    this.titleButton.on('pointerdown', () => {
       input.value = '';
       div.removeAttribute('Style');
       this.scene.start('Title');
@@ -61,9 +61,9 @@ export default class GameOverScene extends Phaser.Scene {
     this.centerButton(this.leaderboardButton, -1);
 
     this.leaderboardText = this.add.text(0, 0, 'Leaderboard', { fontSize: '24px', fill: '#fff' });
-    this.centerButtonText(this.leaderboardText, this.leaderboardButton);
+    this.centerButtonText(this.leaderboardText, -1);
 
-    this.leaderboardButton.on('pointerdown', (pointer) => {
+    this.leaderboardButton.on('pointerdown', () => {
       input.value = '';
       div.removeAttribute('Style');
       this.scene.start('Leaderboard');
@@ -81,14 +81,14 @@ export default class GameOverScene extends Phaser.Scene {
   centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
-      this.add.zone(400, 300 - offset * 120, 800, 600),
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 
-  centerButtonText(gameText, gameButton) {
+  centerButtonText(gameText, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameText,
-      gameButton,
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 }

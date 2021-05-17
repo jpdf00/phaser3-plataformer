@@ -27,7 +27,7 @@ async function getScore() {
 }
 
 function sortArray(array) {
-  for (let i = 0; ;) {
+  for (; ;) {
     let notChanged = true;
     for (let j = 0; j < array.length - 1; j += 1) {
       if (array[j].score < array[j + 1].score) {

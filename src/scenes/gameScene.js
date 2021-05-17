@@ -13,7 +13,7 @@ export default class GameScene extends Phaser.Scene {
   init() {
     // Start counter for score.
     this.score = 0;
-    this.scoreText;
+    this.scoreText = '';
     // number of consecutive jumps made by the player
     this.playerJumps = 0;
   }
@@ -47,7 +47,7 @@ export default class GameScene extends Phaser.Scene {
         this.playerJumps = 0;
       }
       this.player.setVelocityY(500 * -1);
-      this.playerJumps++;
+      this.playerJumps += 1;
 
       // stops animation
       this.player.anims.stop();
@@ -107,12 +107,12 @@ export default class GameScene extends Phaser.Scene {
 
     // --------------------Auxiliar--------------------
     // Setting collisions between the player and the platform group.
-    this.physics.add.collider(this.player, this.platformGroup, function () {
+    this.physics.add.collider(this.player, this.platformGroup, () => {
       // play "run" animation if the player is on a platform.
       if (!this.player.anims.isPlaying) {
         this.player.anims.play('run');
       }
-    }, null, this);
+    }, null);
     // Checking for input.
     this.input.on('pointerdown', this.jump, this);
     // A simple frame for the game
@@ -139,14 +139,14 @@ export default class GameScene extends Phaser.Scene {
     // --------------------Platform--------------------
     // Recycling platforms.
     let minDistance = 800;
-    this.platformGroup.getChildren().forEach(function (platform) {
+    this.platformGroup.getChildren().forEach((platform) => {
       const platformDistance = 800 - platform.x - platform.displayWidth / 2;
       minDistance = Math.min(minDistance, platformDistance);
       if (platform.x < -platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
         this.platformGroup.remove(platform);
       }
-    }, this);
+    });
     // Adding new platforms.
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(100, 250);

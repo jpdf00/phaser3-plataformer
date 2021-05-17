@@ -27,12 +27,12 @@ export default class LeaderboardScene extends Phaser.Scene {
 
     // Title Score
     this.titleButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.titleButton, -1.9);
+    this.centerButton(this.titleButton, -2.2);
 
     this.titleText = this.add.text(0, 0, 'Title Screen', { fontSize: '24px', fill: '#fff' });
-    this.centerButtonText(this.titleText, this.titleButton);
+    this.centerButtonText(this.titleText, -2.2);
 
-    this.titleButton.on('pointerdown', (pointer) => {
+    this.titleButton.on('pointerdown', () => {
       this.scene.start('Title');
     });
 
@@ -48,14 +48,14 @@ export default class LeaderboardScene extends Phaser.Scene {
   centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
-      this.add.zone(400, 300 - offset * 120, 800, 600),
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 
-  centerButtonText(gameText, gameButton) {
+  centerButtonText(gameText, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameText,
-      gameButton,
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 }

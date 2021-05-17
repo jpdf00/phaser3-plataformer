@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import config from '../gameConfig/config.js';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -15,9 +14,9 @@ export default class TitleScene extends Phaser.Scene {
     this.centerButton(this.gameButton);
 
     this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
-    this.centerButtonText(this.gameText, this.gameButton);
+    this.centerButtonText(this.gameText);
 
-    this.gameButton.on('pointerdown', (pointer) => {
+    this.gameButton.on('pointerdown', () => {
       this.scene.start('Game');
     });
 
@@ -26,9 +25,9 @@ export default class TitleScene extends Phaser.Scene {
     this.centerButton(this.leaderboardButton, -1);
 
     this.leaderboardText = this.add.text(0, 0, 'Leaderboard', { fontSize: '24px', fill: '#fff' });
-    this.centerButtonText(this.leaderboardText, this.leaderboardButton);
+    this.centerButtonText(this.leaderboardText, -1);
 
-    this.leaderboardButton.on('pointerdown', (pointer) => {
+    this.leaderboardButton.on('pointerdown', () => {
       this.scene.start('Leaderboard');
     });
 
@@ -44,14 +43,14 @@ export default class TitleScene extends Phaser.Scene {
   centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
-      this.add.zone(config.width / 2, config.height / 2 - offset * 100, config.width, config.height),
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 
-  centerButtonText(gameText, gameButton) {
+  centerButtonText(gameText, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameText,
-      gameButton,
+      this.add.zone(400, 300 - offset * 100, 800, 600),
     );
   }
 }
