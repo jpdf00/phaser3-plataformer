@@ -5,7 +5,7 @@ body {
 }
 
 #inputLabel {
-  color: #ffffff;
+  color: #fff;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 2px;
   padding: 2px;
@@ -13,7 +13,7 @@ body {
 }
 
 #inputName {
-  position:absolute;
+  position: absolute;
   z-index: 999;
   font-size: 25px;
   border-radius: 10px;
@@ -22,14 +22,14 @@ body {
 
 #inputName:focus {
   outline: none;
-  box-shadow: ;
+  box-shadow: 0 2px 5px 5px #aaa;
 }
 
 #nameInputFrame {
   display: none;
   justify-content: center;
   align-items: flex-start;
-  position:absolute;
+  position: absolute;
   z-index: 998;
   width: 800px;
   height: 600px;
