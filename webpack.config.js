@@ -9,7 +9,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'app.bundle.js'
+    filename: 'app.bundle.js',
   },
 
   module: {
@@ -20,11 +20,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
   },
 
   plugins: [
@@ -32,20 +32,20 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/index.html'),
-          to: path.resolve(__dirname, 'build')
+          to: path.resolve(__dirname, 'build'),
         },
         {
           from: path.resolve(__dirname, 'src'),
-          to: path.resolve(__dirname, 'build')
+          to: path.resolve(__dirname, 'build'),
         },
       ],
     }),
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
-      'typeof WEBGL_RENDERER': JSON.stringify(true)
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'build'),
-  }
-}
+  },
+};
