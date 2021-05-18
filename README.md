@@ -1,18 +1,18 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# Cat Jump
 
-> One paragraph statement about the project.
+> A small plataformer game built wiht Javascript and Phaser 3.
 
-![screenshot](./src/assets/app_screenshot.png)
+![screenshot](./screenshots/app_screenshot.png)
 
 [Click Here  to read the game instructions](./game-instructions)
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- JavaScript, CSS, HTML.
+- Phaser 3
+- Webpack, Jest, Babel, eslint, stylelint, webhint.
 
 ## Live Demo
 
@@ -21,11 +21,13 @@
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
 To get a local copy up and running follow these simple example steps.
+
+- On the top of the page there is a green button name "Code"
+![Code Button](./screenshots/code-button.png)
+- Click on the "Code" button.
+- A Menu will appear click in "Download Zip"
+![Download Zip](./screenshots/download-zip.png)
 
 ### Prerequisites
 
