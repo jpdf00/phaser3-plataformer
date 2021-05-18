@@ -2,7 +2,7 @@
 
 # Cat Jump
 
-> A small plataformer game built wiht Javascript and Phaser 3.
+> A small platformer game built wiht Javascript and Phaser 3.
 
 ![screenshot](./screenshots/app_screenshot.png)
 

@@ -1,70 +1,19 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# Cat Jump
 
-> One paragraph statement about the project.
+![screenshot](../screenshots/app_screenshot.png)
 
-![screenshot](./src/assets/app_screenshot.png)
+## Game Description.
 
-Additional description about the project and its features.
+This game is an endless runner platformer. The plataforms appear infinitly until the game ends and the game character (a cat) has to jump from building to building.
+If the cat falls below the edge of the screen the game ends.
+Your progress (score) is measured in seconds. The longer the cat stays "alive" higher the score.
+To jump you have to simply click on the screen with the left mouse button.
+The cat can jump twice. After the second jump, the cat has to touch a platform to be able to jump again.
 
-## Built With
-
-- Major languages
-- Frameworks
-- Technologies used
-
-## Live Demo
-
-[Play Cat Jump](https://cat-jump-jpdf00.netlify.app/)
-
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
-
-## Authors
-
-👤 **João Paulo Dias França**
-
-- GitHub: [@jpdf00](https://github.com/jpdf00)
-- Twitter: [@jpdf00](https://twitter.com/jpdf00)
-- LinkedIn: [João Paulo Dias França](https://www.linkedin.com/in/jpdf00/)
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/jpdf00/phaser3-plataformer/issues).
-
-## Show your support
-
-Give a ⭐️ if you like this project!
-
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
-## 📝 License
-
-This project is [MIT](./LICENSE) licensed.
+On the game over screen you can input your name and click on the "Save Score" button, to save your score in a leaderbord.
+If no name is given, the name "Dafault User" will be attributed.
+If you access the leaderboard (by clicking on the "Leaderboard" button) without saving your score, the score for that run WILL BE LOST!
+If you chose to return to the title screen (by clicking on the "Title Screen" button) without saving your score, the score for that run WILL BE LOST!
+By clicking on the "Leaderboard" button, on the Title screen or on the game over screen, You will be shown a Leaderboard with the top 10 scores.
