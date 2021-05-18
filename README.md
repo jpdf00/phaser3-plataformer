@@ -28,20 +28,31 @@ To get a local copy up and running follow these simple example steps.
 - Click on the "Code" button.
 - A Menu will appear click in "Download Zip"
 ![Download Zip](./screenshots/download-zip.png)
+- Save the "phaser3-plataformer-feature-full-game.zip" file on your computer.
+- Extract the contents of the "phaser3-plataformer-feature-full-game.zip" you just downloaded in a folder.
 
 ### Prerequisites
 
+- nodeJS.
+- A browser.
+
 ### Setup
 
-### Install
+- Open your comand prompt.
+- Go inside the folder "phaser3-plataformer-feature-full-game" (The one you extracted from the "phaser3-plataformer-feature-full-game.zip" file).
+- Type `npm instal`.
 
 ### Usage
 
+- Open your comand prompt.
+- Go inside the folder "phaser3-plataformer-feature-full-game" (The one you extracted from the "phaser3-plataformer-feature-full-game.zip" file).
+- Type `npm run start` (this should open a page in your default browser and the game should load).
+
 ### Run tests
 
-### Deployment
-
-
+- Open your comand prompt.
+- Go inside the folder "phaser3-plataformer-feature-full-game" (The one you extracted from the "phaser3-plataformer-feature-full-game.zip" file).
+- Type `npm run test`.
 
 ## Authors
 
