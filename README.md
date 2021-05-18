@@ -4,7 +4,7 @@
 
 > One paragraph statement about the project.
 
-![screenshot](./features/img/app_screenshot.png)
+![screenshot](./src/assets/app_screenshot.png)
 
 Additional description about the project and its features.
 
@@ -16,7 +16,7 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
+[Play Cat Jump](https://cat-jump-jpdf00.netlify.app/)
 
 
 ## Getting Started
@@ -43,23 +43,17 @@ To get a local copy up and running follow these simple example steps.
 
 ## Authors
 
-👤 **Author1**
+👤 **João Paulo Dias França**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
+- GitHub: [@jpdf00](https://github.com/jpdf00)
+- Twitter: [@jpdf00](https://twitter.com/jpdf00)
+- LinkedIn: [João Paulo Dias França](https://www.linkedin.com/in/jpdf00/)
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/jpdf00/phaser3-plataformer/issues).
 
 ## Show your support
 
@@ -73,4 +67,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](lic.url) licensed.
+This project is [MIT](./LICENSE) licensed.
