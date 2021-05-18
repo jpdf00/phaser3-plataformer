@@ -74,9 +74,13 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+Thanks to:
+
+- Cat Asset by [[LPC] Cats and Dogs" Artist: bluecarrot16 License: CC-BY 3.0 / GPL 3.0 / GPL 2.0 / OGA-BY 3.0](http://opengameart.org/content/lpc-cats-and-dogs).
+- Building Asset by [Pedro Neves](https://opengameart.org/content/plataform-building).
+- Sky Asset by [Paulina Riva](https://opengameart.org/content/sky-background).
+- Phaser 3 template tutorial by [Bill Reed](https://snowbillr.github.io/blog/2018-04-09-a-modern-web-development-setup-for-phaser-3/)
+- Phaser 3 Endless Runner tutorial by [Emanuele Feronato](https://www.emanueleferonato.com/tag/endless-runner/)
 
 ## 📝 License
 
