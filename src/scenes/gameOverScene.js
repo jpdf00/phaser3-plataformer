@@ -16,7 +16,6 @@ export default class GameOverScene extends Phaser.Scene {
     const input = document.querySelector('#inputName');
     div.setAttribute('Style', 'display: flex');
 
-
     this.add.image(400, 300, 'sky').setScale(3);
     this.add.image(400, 300, 'frame');
 
