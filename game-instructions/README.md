@@ -6,7 +6,7 @@
 
 ![screenshot](./src/assets/app_screenshot.png)
 
-[Click Here  to read the game instructions](./game-instructions)
+Additional description about the project and its features.
 
 ## Built With
 
