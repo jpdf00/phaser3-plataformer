@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#inputLabel {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 2px;
+  margin-top: 80px;
+}
+
+#inputName {
+  position: absolute;
+  z-index: 999;
+  font-size: 25px;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+
+#inputName:focus {
+  outline: none;
+  box-shadow: 0 2px 5px 5px #aaa;
+}
+
+#nameInputFrame {
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 998;
+  width: 800px;
+  height: 600px;
+}
+
+.white {
+  color: #fff;
+  font-size: 1px;
+}
