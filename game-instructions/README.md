@@ -4,16 +4,38 @@
 
 ![screenshot](../screenshots/app_screenshot.png)
 
-## Game Description.
+## Game Design Document.
 
-This game is an endless runner platformer. The plataforms appear infinitly until the game ends and the game character (a cat) has to jump from building to building.
-If the cat falls below the edge of the screen the game ends.
-Your progress (score) is measured in seconds. The longer the cat stays "alive" higher the score.
-To jump you have to simply click on the screen with the left mouse button.
-The cat can jump twice. After the second jump, the cat has to touch a platform to be able to jump again.
+Name: Cat Jump.
 
-On the game over screen you can input your name and click on the "Save Score" button, to save your score in a leaderbord.
-If no name is given, the name "Dafault User" will be attributed.
-If you access the leaderboard (by clicking on the "Leaderboard" button) without saving your score, the score for that run WILL BE LOST!
-If you chose to return to the title screen (by clicking on the "Title Screen" button) without saving your score, the score for that run WILL BE LOST!
-By clicking on the "Leaderboard" button, on the Title screen or on the game over screen, You will be shown a Leaderboard with the top 10 scores.
+Type: Endless Runner Platformer.
+
+Core Philosophie: A cat, jumping on top of buildings for as long as possible.
+
+Core Mechanichs:
+- Buildings are added with different sizes, heights and at different intervals.
+- Cat can jump twice before having to touch the top of a building.
+- Score is kept by counting the seconds.
+- Score can be saved.
+- Leaderboard with top 10 scores can be visualized.
+
+Nice to Have Features:
+- Colectables (not implemented due to time constrain).
+- Different assets for the buildings (not implemented due to time constrain).
+
+Milestones:
+- Day 1.
+  - Research.
+  - Practice.
+- Day 2.
+  - Creation of GDD.
+  - Gathering Assets.
+- Day 3.
+  - Setting up Game.
+  - Implement Core Mechanics (platform and player with double-jump).
+- Day 4.
+  - Implement Core Mechanics (score and leaderboard system).
+  - Implement nice to Have Features (not implemented due to time constrain).
+- Day 5.
+  - Tests.
+  - Deployment.

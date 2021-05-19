@@ -1,7 +1,12 @@
-// eslint-disable-next-line no-unused-vars
-import { screen } from '@testing-library/jest-dom';
+import { saveScore, getScore, sortArray } from '../scenes/util.js';
 
-const util = require('../scenes/util.js');
+global.fetch = jest.fn(() => Promise.resolve({
+  json: () => Promise.resolve('Resolve'),
+}));
+
+beforeEach(() => {
+  fetch.mockClear();
+});
 
 describe('Sort Array Function', () => {
   const array = [
@@ -9,7 +14,7 @@ describe('Sort Array Function', () => {
     { user: 'Two', score: 2 },
     { user: 'Three', score: 3 },
   ];
-  const sortedArray = util.sortArray(array);
+  const sortedArray = sortArray(array);
 
   test('it should sort an array of objects by descending order of the score', () => {
     expect(sortedArray[0].score).toBe(3);
@@ -25,29 +30,25 @@ describe('Sort Array Function', () => {
 });
 
 describe('Save Score Function', () => {
-  test('it should save the score to the leaderboard', () => {
-    util.saveScore('jpdf00', 10).then((resp) => {
-      expect(resp.result).toBe('Leaderboard score created correctly.');
-    });
+  test('it should save the score to the leaderboard', async () => {
+    fetch.mockImplementationOnce(() => Promise.resolve({ json: () => Promise.resolve('Leaderboard score created correctly.') }));
+    await expect(saveScore('jpdf00', 10)).resolves.toEqual('Leaderboard score created correctly.');
   });
 
-  test('it should save the score to the leaderboard', () => {
-    util.saveScore('jpdf00', 10).then((resp) => {
-      expect(resp.result).not.toBe('');
-    });
+  test('it should not save the score to the leaderboard', async () => {
+    fetch.mockImplementationOnce(() => Promise.reject(new Error('API is Down')));
+    await expect(saveScore('', '')).rejects.toThrow('API is Down');
   });
 });
 
 describe('Get Score Function', () => {
-  test('it should save the score to the leaderboard', () => {
-    util.getScore().then((resp) => {
-      expect(resp.result.length).toBeGreaterThan(0);
-    });
+  test('it should get the score from the leaderboard', async () => {
+    fetch.mockImplementationOnce(() => Promise.resolve({ json: () => Promise.resolve({ user: 'jpdf00', score: 10 }) }));
+    await expect(getScore()).resolves.toEqual({ user: 'jpdf00', score: 10 });
   });
 
-  test('it should save the score to the leaderboard', () => {
-    util.getScore().then((resp) => {
-      expect(resp.result.length).not.toBe(0);
-    });
+  test('it should not get the score from the leaderboard', async () => {
+    fetch.mockImplementationOnce(() => Promise.reject(new Error('API is Down')));
+    await expect(getScore()).rejects.toThrow('API is Down');
   });
 });
